@@ -1,37 +1,92 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Marvin's Portfolio
+
+A modern, responsive full-stack portfolio website built with Next.js 15, TypeScript, and Tailwind CSS.
+
+## Features
+
+- **Responsive Design**: Mobile-first approach with beautiful UI on all devices
+- **Dark Mode Support**: Automatic dark/light mode switching based on system preferences
+- **Interactive Contact Form**: Fully functional contact form with API integration
+- **Modern UI/UX**: Clean, professional design with smooth animations
+- **SEO Optimized**: Proper metadata and semantic HTML structure
+- **TypeScript**: Full type safety throughout the application
+
+## Tech Stack
+
+- **Frontend**: Next.js 15, React 19, TypeScript
+- **Styling**: Custom CSS with CSS Variables
+- **Fonts**: Geist Sans & Geist Mono
+- **Deployment**: Vercel-ready
 
 ## Getting Started
 
-First, run the development server:
-
+1. Clone the repository:
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+git clone <your-repo-url>
+cd marvins-portfolio
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+2. Install dependencies:
+```bash
+npm install
+```
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+3. Run the development server:
+```bash
+npm run dev
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+4. Open [http://localhost:3000](http://localhost:3000) in your browser
 
-## Learn More
+## Project Structure
 
-To learn more about Next.js, take a look at the following resources:
+```
+app/
+├── api/
+│   └── contact/
+│       └── route.ts          # Contact form API endpoint
+├── globals.css               # Global styles and Tailwind config
+├── layout.tsx               # Root layout with metadata
+└── page.tsx                 # Main portfolio page
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Customization
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### Personal Information
+Update the following in `app/page.tsx`:
+- Name and title in the hero section
+- About section content
+- Skills and technologies
+- Project information
+- Contact details
 
-## Deploy on Vercel
+### Styling
+The portfolio uses custom CSS with CSS variables for styling. You can customize:
+- Colors by modifying CSS variables in `globals.css`
+- Typography and spacing in the CSS classes
+- Component styles in the respective CSS sections
+- Dark mode colors in the media queries
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### Contact Form
+The contact form is fully functional with:
+- Client-side validation
+- API endpoint at `/api/contact`
+- Success/error messaging
+- Form state management
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+To integrate with email services, update the API route in `app/api/contact/route.ts`.
+
+## Deployment
+
+This project is optimized for deployment on Vercel:
+
+1. Push your code to GitHub
+2. Connect your repository to Vercel
+3. Deploy with zero configuration
+
+The portfolio will be available at your Vercel domain.
+
+## License
+
+This project is open source and available under the [MIT License](LICENSE).
 # portfolio
