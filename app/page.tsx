@@ -3,6 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
+import Navbar from "./components/Navbar";
 
 export default function Home() {
   const [formData, setFormData] = useState({
@@ -53,30 +54,14 @@ export default function Home() {
   return (
     <div style={{ minHeight: '100vh', background: 'linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%)' }}>
       {/* Navigation */}
-      <nav className="nav">
-        <div className="container">
-          <div className="nav-content">
-            <div>
-              <h1 className="text-xl font-bold">Marvin's Portfolio</h1>
-            </div>
-            <div className="hidden md:block">
-              <div className="nav-links">
-                <a href="#home" className="nav-link">Home</a>
-                <a href="#about" className="nav-link">About</a>
-                <a href="#projects" className="nav-link">Projects</a>
-                <a href="#contact" className="nav-link">Contact</a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </nav>
+      <Navbar currentPage="home" />
 
       {/* Hero Section */}
       <section id="home" className="hero">
         <div className="container">
           <div className="text-center">
             <div className="hero-avatar">
-              <span>M</span>
+              <img src="https://res.cloudinary.com/shuzchef/image/upload/v1757970503/portfolio/wk7zebtto4nyie3wohvv.png" alt="Marvin Chau" />
             </div>
             <h1 className="hero-title">
               Hi, I'm <span style={{ color: 'var(--primary)' }}>Marvin</span>
@@ -91,6 +76,10 @@ export default function Home() {
               <a href="#contact" className="btn btn-secondary">
                 Get In Touch
               </a>
+              <a href="https://res.cloudinary.com/shuzchef/image/upload/v1757991057/portfolio/saduwmvvdy0fnv7wscta.pdf" target="_blank" className="btn btn-secondary" style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem' }}>
+                <span>📄</span>
+                Download Resume
+              </a>
             </div>
           </div>
         </div>
@@ -100,15 +89,14 @@ export default function Home() {
       <section id="about" className="section" style={{ background: 'var(--card-bg)' }}>
         <div className="container">
           <h2 className="text-center mb-12">About Me</h2>
-          <div className="grid grid-2 items-center">
+          <div className="items-center">
             <div>
               <p className="text-lg mb-6">
                 I'm a passionate full stack developer with expertise in modern web technologies. 
                 I love building scalable applications and solving complex problems through code.
               </p>
               <p className="text-lg mb-8">
-                When I'm not coding, you can find me exploring new technologies, contributing to open source projects, 
-                or sharing knowledge with the developer community.
+                When I'm not coding, you can find me exploring new technologies, cooking, or learning something new.
               </p>
             </div>
             <div>
@@ -149,7 +137,7 @@ export default function Home() {
       <section id="projects" className="section projects">
         <div className="container">
           <h2 className="text-center mb-12">Featured Projects</h2>
-          <div className="grid grid-3">
+          <div className="flex flex-wrap gap-4 justify-center">
             {/* Project 1 */}
             <div className="card">
               <div className="card-header" style={{ background: 'linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%)' }}>
@@ -175,13 +163,13 @@ export default function Home() {
             {/* Project 2 */}
             <div className="card">
               <div className="card-header" style={{ background: 'linear-gradient(135deg, #10b981 0%, #3b82f6 100%)' }}>
-              <img src="https://res.cloudinary.com/shuzchef/image/upload/v1757798484/portfolio/iagtuanenoumeczkr83i.png" alt="Fighters-Edge" />
+              <img src="https://res.cloudinary.com/shuzchef/image/upload/v1757969941/portfolio/x5gst9wfaehn0dkupcf3.png" alt="Fighters-Edge" />
 
               </div>
               <div className="card-content">
                 <h3 className="card-title">Replay Reviewer</h3>
                 <p className="card-description">
-                  A object detection and classification tool for analyzing rep
+                  A object detection and classification tool for analyzing replays.
                 </p>
                 <div className="tags">
                   <span className="tag tag-blue">Python</span>
@@ -204,7 +192,7 @@ export default function Home() {
               <div className="card-content">
                 <h3 className="card-title">Holy Moly</h3>
                 <p className="card-description">
-                  A rouge like game built with Gadot.
+                  A rougelite game built with Gadot.
                 </p>
                 <div className="tags">
                   <span className="tag tag-blue">Gadot</span>
