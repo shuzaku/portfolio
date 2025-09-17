@@ -284,6 +284,11 @@ export default function ProjectsPage() {
                           View Details
                         </Link>
                       )}
+                      {project.id === 'fighters-edge' && (
+                        <Link href="/fighters-edge" className="project-link">
+                          View Details
+                        </Link>
+                      )}
                       {project.liveUrl && project.liveUrl !== '#' && (
                         <a href={project.liveUrl} className="project-link" target="_blank" rel="noopener noreferrer">
                           Live Demo
@@ -375,6 +380,11 @@ export default function ProjectsPage() {
                   <div className="project-links">
                     {project.id === 'glasshive' && (
                       <Link href="/marketing-app" className="project-link">
+                        View Details
+                      </Link>
+                    )}
+                    {project.id === 'fighters-edge' && (
+                      <Link href="/fighters-edge" className="project-link">
                         View Details
                       </Link>
                     )}
