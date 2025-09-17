@@ -154,6 +154,7 @@ export default function Home() {
                   <span className="tag tag-purple">MongoDb</span>
                 </div>
                 <div className="project-links">
+                  <Link href="/fighters-edge" className="project-link">View Details</Link>
                   <a href="https://fighters-edge.com" className="project-link">Live Demo</a>
                   <a href="https://github.com/shuzaku/fightme" className="project-link-secondary">GitHub</a>
                 </div>
@@ -186,23 +187,32 @@ export default function Home() {
             {/* Project 3 */}
             <div className="card">
               <div className="card-header" style={{ background: 'linear-gradient(135deg, #8b5cf6 0%, #ec4899 100%)' }}>
-              <img src="https://res.cloudinary.com/shuzchef/image/upload/v1757798722/portfolio/vrqhvv3ol4h2w4wzj0j9.png" alt="Fighters-Edge" />
-
+                <img src="https://res.cloudinary.com/shuzchef/image/upload/v1757984649/portfolio/ykonh6cflvs594om0ye9.png" alt="Marketing Platform" />
               </div>
               <div className="card-content">
-                <h3 className="card-title">Holy Moly</h3>
+                <h3 className="card-title">Marketing Platform</h3>
                 <p className="card-description">
-                  A rougelite game built with Gadot.
+                  A comprehensive sales and marketing application for IT service providers.
                 </p>
                 <div className="tags">
-                  <span className="tag tag-blue">Gadot</span>
-                  <span className="tag tag-green">Procreate</span>
+                  <span className="tag tag-blue">Vue</span>
+                  <span className="tag tag-green">Node.js</span>
+                  <span className="tag tag-purple">.NET Entity</span>
                 </div>
                 <div className="project-links">
-                  <a href="https://github.com/shuzaku/holy-moly" className="project-link-secondary">GitHub</a>
+                  <Link href="/marketing-app" className="project-link">View Details</Link>
+                  <a href="#" className="project-link">Live Demo</a>
+                  <a href="#" className="project-link-secondary">GitHub</a>
                 </div>
               </div>
             </div>
+          </div>
+          
+          {/* View More Projects Button */}
+          <div className="text-center" style={{ marginTop: '3rem' }}>
+            <Link href="/projects" className="btn btn-primary">
+              View More Projects
+            </Link>
           </div>
         </div>
       </section>
