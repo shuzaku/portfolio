@@ -1,23 +1,24 @@
 import type { Metadata } from "next";
-import { Nunito, Roboto } from "next/font/google";
+import { Fraunces, Outfit } from "next/font/google";
 import "./globals.css";
 
-const nunito = Nunito({
-  variable: "--font-nunito",
+const fraunces = Fraunces({
+  variable: "--font-display",
   subsets: ["latin"],
   display: "swap",
+  axes: ["SOFT", "opsz"],
 });
 
-const roboto = Roboto({
-  variable: "--font-roboto",
+const outfit = Outfit({
+  variable: "--font-body",
   subsets: ["latin"],
-  weight: ["300", "400", "500", "700"],
+  weight: ["300", "400", "500", "600", "700"],
   display: "swap",
 });
 
 export const metadata: Metadata = {
-  title: "Marvin's Portfolio",
-  description: "Full Stack Developer Portfolio - Showcasing my projects and skills",
+  title: "Marvin Chau — Full Stack Developer",
+  description: "Full Stack Developer Portfolio — editorial showcase of projects, experiments, and craft.",
 };
 
 export default function RootLayout({
@@ -28,7 +29,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${nunito.variable} ${roboto.variable} antialiased`}
+        className={`${fraunces.variable} ${outfit.variable} antialiased`}
       >
         {children}
       </body>

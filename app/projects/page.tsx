@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 import Navbar from "../components/Navbar";
@@ -16,462 +15,492 @@ interface Project {
   liveUrl?: string;
   githubUrl?: string;
   featured: boolean;
-  status: 'completed' | 'in-progress' | 'planned' | 'on-going';
+  status: "completed" | "in-progress" | "planned" | "on-going";
   year: number;
 }
 
 export default function ProjectsPage() {
-  const [selectedCategory, setSelectedCategory] = useState('all');
-  const [selectedStatus, setSelectedStatus] = useState('all');
+  const [selectedCategory, setSelectedCategory] = useState("all");
+  const [selectedStatus, setSelectedStatus] = useState("all");
 
   const projects: Project[] = [
     {
-      id: 'fighters-edge',
-      title: 'Fighters-Edge',
-      description: 'A full-stack social feed solution built with Nuxt.js, Node.js, and MongoDB.',
-      longDescription: 'A comprehensive social media platform designed for the fighting game community. Features include real-time chat, user profiles, tournament brackets, and community features. Built with modern web technologies and optimized for performance.',
-      image: 'https://res.cloudinary.com/shuzchef/image/upload/v1757796678/portfolio/ckev6mkjsf0elso75qxm.png',
-      technologies: ['Nuxt.js', 'Node.js', 'MongoDB', 'Socket.io', 'Vue.js'],
-      category: 'web-app',
-      liveUrl: 'https://fighters-edge.com',
-      githubUrl: 'https://github.com/shuzaku/fightme',
+      id: "fighters-edge",
+      title: "Fighters-Edge",
+      description: "A full-stack social feed solution built with Nuxt.js, Node.js, and MongoDB.",
+      longDescription:
+        "A social platform designed for the fighting game community. Real-time chat, profiles, tournament brackets, and community features — built with modern web tech and optimized for performance.",
+      image: "https://res.cloudinary.com/shuzchef/image/upload/v1757796678/portfolio/ckev6mkjsf0elso75qxm.png",
+      technologies: ["Nuxt.js", "Node.js", "MongoDB", "Socket.io", "Vue.js"],
+      category: "web-app",
+      liveUrl: "https://fighters-edge.com",
+      githubUrl: "https://github.com/shuzaku/fightme",
       featured: true,
-      status: 'in-progress',
-      year: 2022
+      status: "in-progress",
+      year: 2022,
     },
     {
-      id: 'replay-reviewer',
-      title: 'Replay Reviewer',
-      description: 'An object detection and classification tool for analyzing replays.',
-      longDescription: 'AI-powered tool that uses text detection and machine learning to analyze gaming replays. Features automated detection of key moments, performance metrics, and detailed analytics. Built with Python and integrated with OpenAI for enhanced analysis.',
-      image: 'https://res.cloudinary.com/shuzchef/image/upload/v1757969941/portfolio/x5gst9wfaehn0dkupcf3.png',
-      technologies: ['Python', 'Ultralytics', 'OpenAI', 'Text Detection', 'Machine Learning'],
-      category: 'ai-ml',
-      liveUrl: '#',
-      githubUrl: '#',
+      id: "replay-reviewer",
+      title: "Replay Reviewer",
+      description: "An object detection and classification tool for analyzing replays.",
+      longDescription:
+        "AI-powered tool using text detection and machine learning to analyze gaming replays. Automated detection of key moments, performance metrics, and analytics — built with Python and OpenAI.",
+      image: "https://res.cloudinary.com/shuzchef/image/upload/v1757969941/portfolio/x5gst9wfaehn0dkupcf3.png",
+      technologies: ["Python", "Ultralytics", "OpenAI", "Text Detection", "Machine Learning"],
+      category: "ai-ml",
+      liveUrl: "#",
+      githubUrl: "#",
       featured: true,
-      status: 'in-progress',
-      year: 2025
+      status: "in-progress",
+      year: 2025,
     },
     {
-      id: 'holy-moly',
-      title: 'Holy Moly',
-      description: 'A roguelite game built with Godot.',
-      longDescription: 'A challenging roguelite game featuring procedurally generated levels, unique power-ups, and engaging combat mechanics. All artwork created using Procreate, showcasing both technical and artistic skills.',
-      image: 'https://res.cloudinary.com/shuzchef/image/upload/v1757798722/portfolio/vrqhvv3ol4h2w4wzj0j9.png',
-      technologies: ['Godot', 'GDScript', 'Procreate', 'Game Design'],
-      category: 'game',
-      liveUrl: '#',
-      githubUrl: 'https://github.com/shuzaku/holy-moly',
+      id: "blindrankers",
+      title: "Blind Rankers",
+      description: "A Nuxt.js blind pairwise ranking game with real-time updates and cloud-backed assets.",
+      longDescription:
+        "Players compare items head-to-head without seeing overall scores, producing fair aggregate rankings. Built with Nuxt 3, MongoDB, Socket.io for live sessions, and AWS S3 for media.",
+      image: "https://res.cloudinary.com/shuzchef/image/upload/v1776534006/portfolio/tyjmwbrj54mnc8sjt8yk.png",
+      technologies: ["Nuxt.js", "TypeScript", "MongoDB", "Socket.io", "AWS S3"],
+      category: "web-app",
+      liveUrl: "#",
+      githubUrl: "https://github.com/shuzaku/blind-ranking-game",
       featured: false,
-      status: 'planned',
-      year: 2025
+      status: "in-progress",
+      year: 2026,
     },
     {
-      id: 'msp-site',
-      title: 'MSP Marketing Sites',
-      description: 'Marketing Site for a MSP companies.',
-      longDescription: 'Marketing Site for a MSP companies. Built with wordpress, and custom themes. Sites included custom scripts, seo, tracking, and more.',
-      image: 'https://res.cloudinary.com/shuzchef/image/upload/v1757982566/portfolio/lnmazd1bkig4osaq8hvt.png',
-      technologies: ['Wordpress', 'PHP', 'SEO', 'Google Analytics'],
-      category: 'frontend',
-      liveUrl: '#',
-      githubUrl: '#',
+      id: "twitch-stream-worker",
+      title: "Twitch Stream Worker",
+      description: "24/7 worker that streams FightersEdge videos to Twitch with a live match overlay.",
+      longDescription:
+        "Pulls shuffled playlists from the FightersEdge API, resolves streams with yt-dlp, composites video with an HTML overlay via ffmpeg, and pushes to Twitch over RTMP. Includes an Express overlay server with now-playing metadata.",
+      image: "https://res.cloudinary.com/shuzchef/image/upload/v1776534006/portfolio/hsq2lkgsdwv9inraijad.png",
+      technologies: ["TypeScript", "Node.js", "ffmpeg", "yt-dlp", "Express"],
+      category: "web-app",
+      liveUrl: "#",
+      githubUrl: "https://github.com/shuzaku/twitch-stream-worker",
       featured: false,
-      status: 'completed',
-      year: 2020
+      status: "in-progress",
+      year: 2026,
     },
     {
-      id: 'tequila-site',
-      title: 'Tequila Site',
-      description: 'Official website for Number Juan Tequila.',
-      longDescription: 'Commericial website for a tequila brand. Built with wordpress, and custom themes. Included woocommerce, scheduling app, and more.',
-      image: 'https://res.cloudinary.com/shuzchef/image/upload/v1757982566/portfolio/fckjgc31erjtdexemmca.png',
-      technologies: ['Wordpress', 'PHP', 'Woocommerce', 'Scheduling Plugin', 'SEO'],
-      category: 'frontend',
-      liveUrl: '#',
-      githubUrl: '#',
+      id: "holy-moly",
+      title: "Holy Moly",
+      description: "A roguelite game built with Godot.",
+      longDescription:
+        "A challenging roguelite game featuring procedurally generated levels, unique power-ups, and engaging combat. All artwork created in Procreate.",
+      image: "https://res.cloudinary.com/shuzchef/image/upload/v1757798722/portfolio/vrqhvv3ol4h2w4wzj0j9.png",
+      technologies: ["Godot", "GDScript", "Procreate", "Game Design"],
+      category: "game",
+      liveUrl: "#",
+      githubUrl: "https://github.com/shuzaku/holy-moly",
       featured: false,
-      status: 'completed',
-      year: 2024
+      status: "planned",
+      year: 2025,
     },
     {
-        id: 'glasshive',
-        title: 'Marketing Platform',
-        description: 'Glasshive is a marketing platform for MSPS',
-        longDescription: 'Glasshive is a sales and marketing app for IT service providers',
-        image: 'https://res.cloudinary.com/shuzchef/image/upload/v1757984649/portfolio/ykonh6cflvs594om0ye9.png',
-        technologies: ['Vue', 'Node.js', '.Net entity', 'Azure', 'SQL Server', 'OpenAI', 'Twilio API', 'Third Party APIs'],
-        category: 'web-app',
-        liveUrl: '#',
-        githubUrl: '#',
-        featured: false,
-        status: 'completed',
-        year: 2024
-      }
+      id: "msp-site",
+      title: "MSP Marketing Sites",
+      description: "Marketing sites for MSP companies.",
+      longDescription:
+        "Marketing sites for MSP companies. Built with WordPress and custom themes — custom scripts, SEO, tracking, and more.",
+      image: "https://res.cloudinary.com/shuzchef/image/upload/v1757982566/portfolio/lnmazd1bkig4osaq8hvt.png",
+      technologies: ["Wordpress", "PHP", "SEO", "Google Analytics"],
+      category: "frontend",
+      liveUrl: "#",
+      githubUrl: "#",
+      featured: false,
+      status: "completed",
+      year: 2020,
+    },
+    {
+      id: "tequila-site",
+      title: "Tequila Site",
+      description: "Official website for Number Juan Tequila.",
+      longDescription:
+        "Commercial website for a tequila brand. Built with WordPress and custom themes, including WooCommerce, scheduling, and more.",
+      image: "https://res.cloudinary.com/shuzchef/image/upload/v1757982566/portfolio/fckjgc31erjtdexemmca.png",
+      technologies: ["Wordpress", "PHP", "Woocommerce", "Scheduling Plugin", "SEO"],
+      category: "frontend",
+      liveUrl: "#",
+      githubUrl: "#",
+      featured: false,
+      status: "completed",
+      year: 2024,
+    },
+    {
+      id: "glasshive",
+      title: "Marketing Platform",
+      description: "Glasshive is a marketing platform for MSPs.",
+      longDescription:
+        "Glasshive is a sales and marketing app for IT service providers — integrating OpenAI, Twilio, and many third-party APIs.",
+      image: "https://res.cloudinary.com/shuzchef/image/upload/v1757984649/portfolio/ykonh6cflvs594om0ye9.png",
+      technologies: ["Vue", "Node.js", ".Net entity", "Azure", "SQL Server", "OpenAI", "Twilio API", "Third Party APIs"],
+      category: "web-app",
+      liveUrl: "#",
+      githubUrl: "#",
+      featured: false,
+      status: "completed",
+      year: 2024,
+    },
   ];
 
   const categories = [
-    { value: 'all', label: 'All Projects' },
-    { value: 'web-app', label: 'Web Applications' },
-    { value: 'ai-ml', label: 'AI & Machine Learning' },
-    { value: 'game', label: 'Games' },
-
+    { value: "all", label: "All Projects" },
+    { value: "web-app", label: "Web Applications" },
+    { value: "ai-ml", label: "AI & Machine Learning" },
+    { value: "game", label: "Games" },
+    { value: "frontend", label: "Frontend" },
   ];
 
   const statuses = [
-    { value: 'all', label: 'All Status' },
-    { value: 'completed', label: 'Completed' },
-    { value: 'in-progress', label: 'In Progress' },
-    { value: 'planned', label: 'Planned' }
+    { value: "all", label: "All Status" },
+    { value: "completed", label: "Completed" },
+    { value: "in-progress", label: "In Progress" },
+    { value: "planned", label: "Planned" },
   ];
 
-  const filteredProjects = projects.filter(project => {
-    const categoryMatch = selectedCategory === 'all' || project.category === selectedCategory;
-    const statusMatch = selectedStatus === 'all' || project.status === selectedStatus;
+  const filteredProjects = projects.filter((project) => {
+    const categoryMatch = selectedCategory === "all" || project.category === selectedCategory;
+    const statusMatch = selectedStatus === "all" || project.status === selectedStatus;
     return categoryMatch && statusMatch;
   });
 
-  const featuredProjects = projects.filter(project => project.featured);
+  const featuredProjects = projects.filter((p) => p.featured);
 
   const getStatusColor = (status: string) => {
     switch (status) {
-      case 'completed': return 'tag-green';
-      case 'in-progress': return 'tag-yellow';
-      case 'planned': return 'tag-blue';
-      default: return 'tag-blue';
+      case "completed":   return "tag-green";
+      case "in-progress": return "tag-yellow";
+      case "planned":     return "tag-blue";
+      default:            return "tag-blue";
     }
   };
 
   const getStatusLabel = (status: string) => {
     switch (status) {
-      case 'completed': return 'Completed';
-      case 'in-progress': return 'In Progress';
-      case 'planned': return 'Planned';
-      default: return 'Unknown';
+      case "completed":   return "Completed";
+      case "in-progress": return "In Progress";
+      case "planned":     return "Planned";
+      default:            return "Unknown";
     }
   };
 
+  const detailsHrefFor = (id: string) => {
+    if (id === "glasshive")            return "/marketing-app";
+    if (id === "fighters-edge")        return "/fighters-edge";
+    if (id === "blindrankers")         return "/blind-rankers";
+    if (id === "twitch-stream-worker") return "/twitch-stream-worker";
+    return null;
+  };
+
+  const unfiltered = selectedCategory === "all" && selectedStatus === "all";
+
   return (
-    <div style={{ minHeight: '100vh', background: 'linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%)' }}>
-      {/* Navigation */}
+    <div>
       <Navbar currentPage="projects" />
 
-      {/* Hero Section */}
-      <section className="hero" style={{ paddingTop: '6rem', paddingBottom: '3rem' }}>
+      {/* ===== Editorial header ===== */}
+      <section className="projects-hero">
         <div className="container">
-          <div className="text-center">
-            <h1 className="hero-title" style={{ fontSize: '3.5rem', marginBottom: '1rem' }}>
-              My <span style={{ color: 'var(--primary)' }}>Projects</span>
-            </h1>
-            <p className="hero-subtitle" style={{ fontSize: '1.25rem', maxWidth: '48rem', margin: '0 auto 2rem' }}>
-              A collection of my work showcasing various technologies, frameworks, and problem-solving approaches
-            </p>
-            <div className="flex gap-4 justify-center flex-wrap">
-              <div className="text-center">
-                <div className="text-2xl font-bold" style={{ color: 'var(--primary)' }}>{projects.length}</div>
-                <div className="text-sm" style={{ color: 'var(--text-secondary)' }}>Total Projects</div>
+          <div className="projects-hero-inner">
+            <div>
+              <div className="eyebrow">Portfolio · {new Date().getFullYear()}</div>
+              <h1 className="hero-title" style={{ marginBottom: "1.25rem" }}>
+                A <em>catalog</em><br />of made things.
+              </h1>
+              <p className="section-lede" style={{ marginBottom: 0, maxWidth: "36rem" }}>
+                Web apps, AI tooling, marketing sites, and one stubborn roguelite.
+                A cross-section of the things I build, ship, and occasionally rebuild.
+              </p>
+            </div>
+            <div className="projects-stats">
+              <div className="project-stat">
+                <div className="project-stat-number">{projects.length}</div>
+                <div className="project-stat-label">Projects</div>
               </div>
-              <div className="text-center">
-                <div className="text-2xl font-bold" style={{ color: 'var(--primary)' }}>{featuredProjects.length}</div>
-                <div className="text-sm" style={{ color: 'var(--text-secondary)' }}>Featured</div>
+              <div className="project-stat">
+                <div className="project-stat-number">{featuredProjects.length}</div>
+                <div className="project-stat-label">Featured</div>
               </div>
-              <div className="text-center">
-                <div className="text-2xl font-bold" style={{ color: 'var(--primary)' }}>
-                  {projects.filter(p => p.status === 'completed').length}
+              <div className="project-stat">
+                <div className="project-stat-number">
+                  {projects.filter((p) => p.status === "completed").length}
                 </div>
-                <div className="text-sm" style={{ color: 'var(--text-secondary)' }}>Completed</div>
+                <div className="project-stat-label">Shipped</div>
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Filters */}
-      <section className="section" style={{ paddingTop: '2rem', paddingBottom: '2rem', background: 'var(--card-bg)' }}>
+      {/* ===== Sticky filters ===== */}
+      <section className="projects-filters">
         <div className="container">
-          <div className="flex flex-wrap gap-4 justify-center items-center">
-            <div className="flex gap-2">
-              <label className="form-label" style={{ margin: 0, marginRight: '0.5rem' }}>Category:</label>
-              <select
-                value={selectedCategory}
-                onChange={(e) => setSelectedCategory(e.target.value)}
-                className="form-input"
-                style={{ width: 'auto', minWidth: '150px' }}
-              >
-                {categories.map(category => (
-                  <option key={category.value} value={category.value}>
-                    {category.label}
-                  </option>
-                ))}
-              </select>
+          <div className="flex flex-wrap gap-6 justify-between items-center">
+            <div className="flex flex-wrap gap-6">
+              <div className="filter-group">
+                <label className="filter-label">Category</label>
+                <select
+                  value={selectedCategory}
+                  onChange={(e) => setSelectedCategory(e.target.value)}
+                  className="filter-select"
+                >
+                  {categories.map((c) => (
+                    <option key={c.value} value={c.value}>{c.label}</option>
+                  ))}
+                </select>
+              </div>
+              <div className="filter-group">
+                <label className="filter-label">Status</label>
+                <select
+                  value={selectedStatus}
+                  onChange={(e) => setSelectedStatus(e.target.value)}
+                  className="filter-select"
+                >
+                  {statuses.map((s) => (
+                    <option key={s.value} value={s.value}>{s.label}</option>
+                  ))}
+                </select>
+              </div>
             </div>
-            <div className="flex gap-2">
-              <label className="form-label" style={{ margin: 0, marginRight: '0.5rem' }}>Status:</label>
-              <select
-                value={selectedStatus}
-                onChange={(e) => setSelectedStatus(e.target.value)}
-                className="form-input"
-                style={{ width: 'auto', minWidth: '150px' }}
-              >
-                {statuses.map(status => (
-                  <option key={status.value} value={status.value}>
-                    {status.label}
-                  </option>
-                ))}
-              </select>
+            <div style={{ fontSize: "0.85rem", color: "var(--muted)" }}>
+              Showing <strong style={{ color: "var(--cream)" }}>{filteredProjects.length}</strong>{" "}
+              of {projects.length}
             </div>
           </div>
         </div>
       </section>
 
-      {/* Featured Projects */}
-      {selectedCategory === 'all' && selectedStatus === 'all' && (
-        <section className="section" style={{ background: 'var(--background)' }}>
+      {/* ===== Featured (zigzag) ===== */}
+      {unfiltered && (
+        <section className="section">
           <div className="container">
-            <h2 className="text-center mb-12">Featured Projects</h2>
-            <div className="flex flex-wrap gap-6 justify-center">
-              {featuredProjects.map((project) => (
-                <div key={project.id} className="card" style={{ width: '400px' }}>
-                  <div className="card-header" style={{ height: '200px', position: 'relative' }}>
-                    <img 
-                      src={project.image} 
-                      alt={project.title}
-                      style={{ 
-                        width: '100%', 
-                        height: '100%', 
-                        objectFit: 'cover',
-                        borderRadius: '0.5rem 0.5rem 0 0'
-                      }}
-                    />
-                    <div style={{ 
-                      position: 'absolute', 
-                      top: '1rem', 
-                      right: '1rem',
-                      background: 'rgba(0,0,0,0.7)',
-                      color: 'white',
-                      padding: '0.25rem 0.5rem',
-                      borderRadius: '0.25rem',
-                      fontSize: '0.75rem',
-                      fontWeight: '600'
-                    }}>
-                      {project.year}
+            <div className="text-center mb-12">
+              <div className="eyebrow" style={{ justifyContent: "center" }}>Featured</div>
+              <h2 className="section-title">
+                The <em>headliners.</em>
+              </h2>
+            </div>
+
+            <div className="showcase">
+              {featuredProjects.map((p, i) => {
+                const detailsHref = detailsHrefFor(p.id);
+                return (
+                  <article key={p.id} className="showcase-item">
+                    <div className="showcase-visual">
+                      <img src={p.image} alt={p.title} />
                     </div>
-                  </div>
-                  <div className="card-content">
-                    <div className="flex justify-between items-start mb-2">
-                      <h3 className="card-title">{project.title}</h3>
-                      <span className={`tag ${getStatusColor(project.status)}`}>
-                        {getStatusLabel(project.status)}
-                      </span>
-                    </div>
-                    <p className="card-description" style={{ marginBottom: '1rem' }}>
-                      {project.longDescription}
-                    </p>
-                    <div className="tags" style={{ marginBottom: '1rem' }}>
-                      {project.technologies.slice(0, 4).map((tech) => (
-                        <span key={tech} className="tag tag-blue">{tech}</span>
-                      ))}
-                      {project.technologies.length > 4 && (
-                        <span className="tag" style={{ background: 'var(--text-muted)', color: 'white' }}>
-                          +{project.technologies.length - 4} more
+                    <div className="showcase-copy">
+                      <div className="showcase-number">
+                        {String(i + 1).padStart(2, "0")} · {p.year}
+                      </div>
+                      <h3 className="showcase-title">{p.title}</h3>
+                      <div className="showcase-tags">
+                        <span className={`tag ${getStatusColor(p.status)}`}>
+                          {getStatusLabel(p.status)}
                         </span>
-                      )}
+                        {p.technologies.slice(0, 4).map((t) => (
+                          <span key={t} className="tag tag-outline">{t}</span>
+                        ))}
+                        {p.technologies.length > 4 && (
+                          <span className="tag tag-outline">
+                            +{p.technologies.length - 4}
+                          </span>
+                        )}
+                      </div>
+                      <p className="showcase-description">{p.longDescription}</p>
+                      <div className="showcase-links">
+                        {detailsHref && (
+                          <Link href={detailsHref} className="showcase-link is-primary">
+                            View Details <span className="arrow">→</span>
+                          </Link>
+                        )}
+                        {p.liveUrl && p.liveUrl !== "#" && (
+                          <a
+                            href={p.liveUrl}
+                            className="showcase-link"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                          >
+                            Live Demo <span className="arrow">↗</span>
+                          </a>
+                        )}
+                        {p.githubUrl && p.githubUrl !== "#" && (
+                          <a
+                            href={p.githubUrl}
+                            className="showcase-link"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                          >
+                            GitHub <span className="arrow">↗</span>
+                          </a>
+                        )}
+                      </div>
                     </div>
-                    <div className="project-links">
-                      {project.id === 'glasshive' && (
-                        <Link href="/marketing-app" className="project-link">
-                          View Details
-                        </Link>
-                      )}
-                      {project.id === 'fighters-edge' && (
-                        <Link href="/fighters-edge" className="project-link">
-                          View Details
-                        </Link>
-                      )}
-                      {project.liveUrl && project.liveUrl !== '#' && (
-                        <a href={project.liveUrl} className="project-link" target="_blank" rel="noopener noreferrer">
-                          Live Demo
-                        </a>
-                      )}
-                      {project.githubUrl && project.githubUrl !== '#' && (
-                        <a href={project.githubUrl} className="project-link-secondary" target="_blank" rel="noopener noreferrer">
-                          GitHub
-                        </a>
-                      )}
-                    </div>
-                  </div>
-                </div>
-              ))}
+                  </article>
+                );
+              })}
             </div>
           </div>
         </section>
       )}
 
-      {/* All Projects */}
-      <section className="section" style={{ background: selectedCategory === 'all' && selectedStatus === 'all' ? 'var(--card-bg)' : 'var(--background)' }}>
+      {/* ===== Full archive — editorial strip list ===== */}
+      <section className="section">
         <div className="container">
-          <h2 className="text-center mb-12">
-            {selectedCategory === 'all' && selectedStatus === 'all' ? 'All Projects' : 'Filtered Projects'}
-          </h2>
-          <div className="flex flex-wrap gap-6 justify-center">
-            {filteredProjects.map((project) => (
-              <div key={project.id} className="card" style={{ width: '350px' }}>
-                <div className="card-header" style={{ height: '180px', position: 'relative' }}>
-                  <img 
-                    src={project.image} 
-                    alt={project.title}
-                    style={{ 
-                      width: '100%', 
-                      height: '100%', 
-                      objectFit: 'cover',
-                      borderRadius: '0.5rem 0.5rem 0 0'
-                    }}
-                  />
-                  <div style={{ 
-                    position: 'absolute', 
-                    top: '0.75rem', 
-                    right: '0.75rem',
-                    background: 'rgba(0,0,0,0.7)',
-                    color: 'white',
-                    padding: '0.25rem 0.5rem',
-                    borderRadius: '0.25rem',
-                    fontSize: '0.75rem',
-                    fontWeight: '600'
-                  }}>
-                    {project.year}
-                  </div>
-                  {project.featured && (
-                    <div style={{ 
-                      position: 'absolute', 
-                      top: '0.75rem', 
-                      left: '0.75rem',
-                      background: 'var(--primary)',
-                      color: 'white',
-                      padding: '0.25rem 0.5rem',
-                      borderRadius: '0.25rem',
-                      fontSize: '0.75rem',
-                      fontWeight: '600'
-                    }}>
-                      Featured
-                    </div>
-                  )}
-                </div>
-                <div className="card-content">
-                  <div className="flex justify-between items-start mb-2">
-                    <h3 className="card-title">{project.title}</h3>
-                    <span className={`tag ${getStatusColor(project.status)}`}>
-                      {getStatusLabel(project.status)}
-                    </span>
-                  </div>
-                  <p className="card-description" style={{ marginBottom: '1rem' }}>
-                    {project.description}
-                  </p>
-                  <div className="tags" style={{ marginBottom: '1rem' }}>
-                    {project.technologies.slice(0, 3).map((tech) => (
-                      <span key={tech} className="tag tag-blue">{tech}</span>
-                    ))}
-                    {project.technologies.length > 3 && (
-                      <span className="tag" style={{ background: 'var(--text-muted)', color: 'white' }}>
-                        +{project.technologies.length - 3}
-                      </span>
-                    )}
-                  </div>
-                  <div className="project-links">
-                    {project.id === 'glasshive' && (
-                      <Link href="/marketing-app" className="project-link">
-                        View Details
-                      </Link>
-                    )}
-                    {project.id === 'fighters-edge' && (
-                      <Link href="/fighters-edge" className="project-link">
-                        View Details
-                      </Link>
-                    )}
-                    {project.liveUrl && project.liveUrl !== '#' && (
-                      <a href={project.liveUrl} className="project-link" target="_blank" rel="noopener noreferrer">
-                        Live Demo
-                      </a>
-                    )}
-                    {project.githubUrl && project.githubUrl !== '#' && (
-                      <a href={project.githubUrl} className="project-link-secondary" target="_blank" rel="noopener noreferrer">
-                        GitHub
-                      </a>
-                    )}
-                  </div>
-                </div>
-              </div>
-            ))}
+          <div className="mb-12">
+            <div className="eyebrow">{unfiltered ? "Archive" : "Filtered"}</div>
+            <h2 className="section-title">
+              {unfiltered ? "Everything else." : "Matches your filter."}
+            </h2>
           </div>
-          {filteredProjects.length === 0 && (
-            <div className="text-center" style={{ padding: '3rem 0' }}>
-              <h3 style={{ color: 'var(--text-secondary)', marginBottom: '1rem' }}>No projects found</h3>
-              <p style={{ color: 'var(--text-muted)' }}>Try adjusting your filters to see more projects.</p>
+
+          {filteredProjects.length === 0 ? (
+            <div className="empty-state">
+              <div className="empty-state-icon">◎</div>
+              <div className="empty-state-title">Nothing here yet</div>
+              <p className="empty-state-description">
+                Try adjusting your filters to see more projects.
+              </p>
+            </div>
+          ) : (
+            <div>
+              {filteredProjects.map((p) => {
+                const detailsHref = detailsHrefFor(p.id);
+                return (
+                  <article key={p.id} className="project-strip">
+                    <div className="project-strip-media">
+                      <img src={p.image} alt={p.title} />
+                    </div>
+                    <div>
+                      <h3 className="project-strip-title">{p.title}</h3>
+                      <div className="project-strip-meta">
+                        <span>{p.year}</span>
+                        <span className="dot">·</span>
+                        <span className={`tag ${getStatusColor(p.status)}`}>
+                          {getStatusLabel(p.status)}
+                        </span>
+                        {p.featured && (
+                          <>
+                            <span className="dot">·</span>
+                            <span className="tag tag-orange">Featured</span>
+                          </>
+                        )}
+                      </div>
+                      <p className="project-strip-desc">{p.description}</p>
+                      <div className="showcase-tags" style={{ marginBottom: 0 }}>
+                        {p.technologies.slice(0, 5).map((t) => (
+                          <span key={t} className="tag tag-outline">{t}</span>
+                        ))}
+                        {p.technologies.length > 5 && (
+                          <span className="tag tag-outline">
+                            +{p.technologies.length - 5}
+                          </span>
+                        )}
+                      </div>
+                    </div>
+                    <div className="flex flex-col gap-2">
+                      {detailsHref && (
+                        <Link href={detailsHref} className="project-strip-cta">
+                          View Details →
+                        </Link>
+                      )}
+                      {p.liveUrl && p.liveUrl !== "#" && (
+                        <a
+                          href={p.liveUrl}
+                          className="project-strip-cta"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
+                          Live Demo ↗
+                        </a>
+                      )}
+                      {p.githubUrl && p.githubUrl !== "#" && (
+                        <a
+                          href={p.githubUrl}
+                          className="project-strip-cta"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
+                          GitHub ↗
+                        </a>
+                      )}
+                    </div>
+                  </article>
+                );
+              })}
             </div>
           )}
         </div>
       </section>
 
-       {/* CV/Resume Download Section */}
-       <section className="section" style={{ background: 'var(--background)' }}>
-         <div className="container">
-           <div className="text-center">
-             <h2 className="mb-6">Download My Resume</h2>
-             <p className="text-lg mb-8" style={{ maxWidth: '48rem', margin: '0 auto 2rem' }}>
-               Get a detailed overview of my experience, skills, and achievements in a downloadable format.
-             </p>
-             <div className="flex gap-4 justify-center flex-wrap">
-               <a 
-                 href="https://res.cloudinary.com/shuzchef/image/upload/v1757991057/portfolio/saduwmvvdy0fnv7wscta.pdf" 
-                 target="_blank"
-                 download="Marvin_Chau_Resume.pdf"
-                 className="btn btn-primary"
-                 style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem' }}
-               >
-                 <span>📄</span>
-                 Download Resume (PDF)
-               </a>
+      {/* ===== Resume / CTA ===== */}
+      <section className="section">
+        <div className="container">
+          <div className="contact-card text-center" style={{ maxWidth: "48rem", margin: "0 auto" }}>
+            <div className="eyebrow" style={{ justifyContent: "center" }}>Resume</div>
+            <h2 className="section-title" style={{ marginBottom: "1rem" }}>
+              Want the <em>full story?</em>
+            </h2>
+            <p className="section-lede" style={{ marginBottom: "2rem", marginLeft: "auto", marginRight: "auto" }}>
+              Download the PDF for experience, achievements, and a tidy one-page summary.
+            </p>
+            <div className="flex gap-4 justify-center flex-wrap">
+              <a
+                href="https://res.cloudinary.com/shuzchef/image/upload/v1757991057/portfolio/saduwmvvdy0fnv7wscta.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+                download="Marvin_Chau_Resume.pdf"
+                className="btn btn-primary"
+              >
+                Download Resume ↓
+              </a>
+              <Link href="/#contact" className="btn btn-secondary">
+                Get in Touch
+              </Link>
+            </div>
+            <div style={{ marginTop: "1.25rem", color: "var(--muted)", fontSize: "0.85rem" }}>
+              Last updated · September 2025
+            </div>
+          </div>
+        </div>
+      </section>
 
-             </div>
-             <div className="mt-6" style={{ color: 'var(--text-muted)', fontSize: '0.875rem' }}>
-               <p>Last updated: September 2025</p>
-             </div>
-           </div>
-         </div>
-       </section>
-
-       {/* Call to Action */}
-       <section className="section" style={{ background: 'var(--card-bg)' }}>
-         <div className="container">
-           <div className="text-center">
-             <h2 className="mb-6">Interested in Working Together?</h2>
-             <p className="text-lg mb-8" style={{ maxWidth: '48rem', margin: '0 auto 2rem' }}>
-               I'm always excited to take on new challenges and create amazing solutions. 
-               Let's discuss your next project!
-             </p>
-             <div className="flex gap-4 justify-center flex-wrap">
-               <Link href="/#contact" className="btn btn-primary">
-                 Get In Touch
-               </Link>
-               <a href="/" className="btn btn-secondary">
-                 Back to Home
-               </a>
-             </div>
-           </div>
-         </div>
-       </section>
-
-      {/* Footer */}
       <footer className="footer">
         <div className="container">
           <div className="footer-content">
             <div>
-              <p style={{ color: '#94a3b8' }}>&copy; 2025 Marvin's Portfolio. All rights reserved.</p>
+              <p style={{ color: "var(--muted)", margin: 0 }}>
+                &copy; {new Date().getFullYear()} Marvin Chau — crafted with care.
+              </p>
             </div>
             <div className="footer-links">
-              <a href="https://www.linkedin.com/in/marvin-chau-8b356b14/" className="footer-link">LinkedIn</a>
-              <a href="https://github.com/shuzaku" className="footer-link">GitHub</a>
-              <a href="https://x.com/ShuzChef" className="footer-link">Twitter</a>
+              <a
+                href="https://www.linkedin.com/in/marvin-chau-8b356b14/"
+                className="footer-link"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                LinkedIn
+              </a>
+              <a
+                href="https://github.com/shuzaku"
+                className="footer-link"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                GitHub
+              </a>
+              <a
+                href="https://x.com/ShuzChef"
+                className="footer-link"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Twitter
+              </a>
             </div>
           </div>
         </div>

@@ -1,257 +1,370 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 import Navbar from "./components/Navbar";
 
-export default function Home() {
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    message: ''
-  });
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [submitStatus, setSubmitStatus] = useState('');
+type SkillGroup = {
+  label: string;
+  tone: "is-frontend" | "is-backend" | "is-lang" | "is-arch" | "is-devops" | "is-test";
+  items: string[];
+};
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+const skillGroups: SkillGroup[] = [
+  {
+    label: "Frontend",
+    tone: "is-frontend",
+    items: ["React", "Vue", "Next.js", "Nuxt.js", "TypeScript"],
+  },
+  {
+    label: "Backend",
+    tone: "is-backend",
+    items: ["Node.js", "Express", "NestJS", "Python", "Flask", ".NET Entity", "PostgreSQL"],
+  },
+  {
+    label: "Languages & Data",
+    tone: "is-lang",
+    items: ["TypeScript", "C#", "Python", "PHP", "SQL Server", "MongoDB", "Redis", "MySQL"],
+  },
+  {
+    label: "Architecture & APIs",
+    tone: "is-arch",
+    items: ["REST", "OData", "GraphQL", "Microservices", "API Integrations"],
+  },
+  {
+    label: "DevOps & Infra",
+    tone: "is-devops",
+    items: ["Azure", "GCP", "Firebase", "Docker", "Azure DevOps", "GitHub Actions", "Jenkins"],
+  },
+  {
+    label: "Testing",
+    tone: "is-test",
+    items: ["Jest", "NUnit", "PyTest", "Cypress"],
+  },
+];
+
+type Showcase = {
+  number: string;
+  title: string;
+  titleEm: string;
+  description: string;
+  image: string;
+  tags: { label: string; tone: string }[];
+  links: { label: string; href: string; primary?: boolean; internal?: boolean }[];
+};
+
+const showcases: Showcase[] = [
+  {
+    number: "01",
+    title: "A social layer for the",
+    titleEm: "fighting game community",
+    description:
+      "Fighters-Edge is a full-stack social feed built with Nuxt.js, Node.js, and MongoDB. Real-time posts, tournament threads, and profiles — all optimized for a tight-knit community.",
+    image:
+      "https://res.cloudinary.com/shuzchef/image/upload/v1757796678/portfolio/ckev6mkjsf0elso75qxm.png",
+    tags: [
+      { label: "Nuxt.js", tone: "tag-blue" },
+      { label: "Node.js", tone: "tag-green" },
+      { label: "MongoDB", tone: "tag-purple" },
+    ],
+    links: [
+      { label: "View Details", href: "/fighters-edge", primary: true, internal: true },
+      { label: "Live Demo", href: "https://fighters-edge.com" },
+      { label: "GitHub", href: "https://github.com/shuzaku/fightme" },
+    ],
+  },
+  {
+    number: "02",
+    title: "Object detection for",
+    titleEm: "gameplay replays",
+    description:
+      "Replay Reviewer is an AI-driven tool using Ultralytics, OpenAI, and custom text detection to analyze fighting-game replays — automatically surfacing key moments and performance metrics.",
+    image:
+      "https://res.cloudinary.com/shuzchef/image/upload/v1757969941/portfolio/x5gst9wfaehn0dkupcf3.png",
+    tags: [
+      { label: "Python", tone: "tag-blue" },
+      { label: "Ultralytics", tone: "tag-orange" },
+      { label: "OpenAI", tone: "tag-yellow" },
+    ],
+    links: [
+      { label: "Live Demo", href: "#", primary: true },
+      { label: "GitHub", href: "#" },
+    ],
+  },
+  {
+    number: "03",
+    title: "A marketing platform for",
+    titleEm: "IT service providers",
+    description:
+      "Glasshive is a comprehensive sales & marketing application for MSPs. Built with Vue, Node.js, and .NET Entity — integrating OpenAI, Twilio, and a constellation of third-party APIs.",
+    image:
+      "https://res.cloudinary.com/shuzchef/image/upload/v1757984649/portfolio/ykonh6cflvs594om0ye9.png",
+    tags: [
+      { label: "Vue", tone: "tag-blue" },
+      { label: "Node.js", tone: "tag-green" },
+      { label: ".NET Entity", tone: "tag-purple" },
+    ],
+    links: [
+      { label: "View Details", href: "/marketing-app", primary: true, internal: true },
+      { label: "Live Demo", href: "#" },
+      { label: "GitHub", href: "#" },
+    ],
+  },
+];
+
+const marqueeWords = [
+  "Full Stack",
+  "Editorial Craft",
+  "Real-Time Systems",
+  "AI & ML",
+  "Design Engineering",
+  "Game Dev",
+  "Scalable APIs",
+  "Developer Experience",
+];
+
+export default function Home() {
+  const [formData, setFormData] = useState({ name: "", email: "", message: "" });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState("");
+
+  const handleInputChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
     const { name, value } = e.target;
-    setFormData(prev => ({
-      ...prev,
-      [name]: value
-    }));
+    setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
-    setSubmitStatus('');
-
+    setSubmitStatus("");
     try {
-      const response = await fetch('/api/contact', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),
       });
-
-      const data = await response.json();
-
       if (response.ok) {
-        setSubmitStatus('success');
-        setFormData({ name: '', email: '', message: '' });
+        setSubmitStatus("success");
+        setFormData({ name: "", email: "", message: "" });
       } else {
-        setSubmitStatus('error');
+        setSubmitStatus("error");
       }
-    } catch (error) {
-      setSubmitStatus('error');
+    } catch {
+      setSubmitStatus("error");
     } finally {
       setIsSubmitting(false);
     }
   };
 
+  const renderLink = (
+    link: { label: string; href: string; primary?: boolean; internal?: boolean }
+  ) => {
+    const className = `showcase-link${link.primary ? " is-primary" : ""}`;
+    const content = (
+      <>
+        {link.label}
+        <span className="arrow">→</span>
+      </>
+    );
+    if (link.internal) {
+      return (
+        <Link key={link.label} href={link.href} className={className}>
+          {content}
+        </Link>
+      );
+    }
+    return (
+      <a
+        key={link.label}
+        href={link.href}
+        className={className}
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        {content}
+      </a>
+    );
+  };
+
   return (
-    <div style={{ minHeight: '100vh', background: 'linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%)' }}>
-      {/* Navigation */}
+    <div>
       <Navbar currentPage="home" />
 
-      {/* Hero Section */}
+      {/* ===== HERO ===== */}
       <section id="home" className="hero">
         <div className="container">
-          <div className="text-center">
-            <div className="hero-avatar">
-              <img src="https://res.cloudinary.com/shuzchef/image/upload/v1757970503/portfolio/wk7zebtto4nyie3wohvv.png" alt="Marvin Chau" />
+          <div className="hero-editorial">
+            <div>
+              <div className="hero-eyebrow">Available for work · Dallas, TX</div>
+              <h1 className="hero-title">
+                <span className="line"><span>Marvin Chau</span></span>
+                <span className="line"><span><em>builds</em> thoughtful</span></span>
+                <span className="line"><span>web experiences.</span></span>
+              </h1>
+              <p className="hero-subtitle">
+                Full Stack developer crafting scalable apps, real-time systems, and the
+                occasional roguelite. Comfortable from database schemas to pixel-perfect UI.
+              </p>
+              <div className="hero-actions">
+                <a href="#projects" className="btn btn-primary">
+                  View Work
+                  <span className="arrow">→</span>
+                </a>
+                <a href="#contact" className="btn btn-secondary">Get in Touch</a>
+                <a
+                  href="https://res.cloudinary.com/shuzchef/image/upload/v1757991057/portfolio/saduwmvvdy0fnv7wscta.pdf"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn btn-secondary"
+                >
+                  Resume ↗
+                </a>
+              </div>
             </div>
-            <h1 className="hero-title">
-              Hi, I'm <span style={{ color: 'var(--primary)' }}>Marvin</span>
-            </h1>
-            <p className="hero-subtitle">
-              Full Stack Developer passionate about creating amazing web experiences
+
+            <div className="hero-portrait">
+              <img
+                src="https://res.cloudinary.com/shuzchef/image/upload/v1757970503/portfolio/wk7zebtto4nyie3wohvv.png"
+                alt="Marvin Chau"
+              />
+              <div className="hero-portrait-tag">Est. 2015 · TX</div>
+            </div>
+          </div>
+
+          <div className="hero-marquee" aria-hidden="true">
+            <div className="hero-marquee-track">
+              {[...marqueeWords, ...marqueeWords].map((word, i) => (
+                <span key={i} className="hero-marquee-item">{word}</span>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ===== ABOUT ===== */}
+      <section id="about" className="section about">
+        <div className="container">
+          <div className="about-split">
+            <div>
+              <div className="eyebrow">About</div>
+              <p className="about-intro-lede">
+                I love building things that feel inevitable — fast, considered,
+                and quietly delightful.
+              </p>
+              <p className="about-intro-body">
+                I'm a full stack developer with experience across frontend frameworks,
+                distributed backends, and everything in between. When I'm not shipping,
+                I'm cooking, sketching game ideas, or diving into something new.
+              </p>
+            </div>
+
+            <div>
+              <span className="about-side-label">Stack &amp; Craft</span>
+              {skillGroups.map((group) => (
+                <div key={group.label} className="skill-group">
+                  <div className="skill-group-label">{group.label}</div>
+                  <div className="skill-cloud">
+                    {group.items.map((item) => (
+                      <span key={item} className={`skill-chip ${group.tone}`}>
+                        <span className="dot" />
+                        {item}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ===== PROJECTS (zigzag showcase) ===== */}
+      <section id="projects" className="section">
+        <div className="container">
+          <div className="text-center mb-12">
+            <div className="eyebrow" style={{ justifyContent: "center" }}>Selected Work</div>
+            <h2 className="section-title">
+              Projects I've <em>loved</em> making.
+            </h2>
+            <p className="section-lede" style={{ marginLeft: "auto", marginRight: "auto" }}>
+              A small selection of recent builds. Each one taught me something I'm still using.
             </p>
-            <div className="hero-actions">
-              <a href="#projects" className="btn btn-primary">
-                View My Work
-              </a>
-              <a href="#contact" className="btn btn-secondary">
-                Get In Touch
-              </a>
-              <a href="https://res.cloudinary.com/shuzchef/image/upload/v1757991057/portfolio/saduwmvvdy0fnv7wscta.pdf" target="_blank" className="btn btn-secondary" style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem' }}>
-                <span>📄</span>
-                Download Resume
-              </a>
-            </div>
           </div>
-        </div>
-      </section>
 
-      {/* About Section */}
-      <section id="about" className="section" style={{ background: 'var(--card-bg)' }}>
-        <div className="container">
-          <h2 className="text-center mb-12">About Me</h2>
-          <div className="items-center">
-            <div>
-              <p className="text-lg mb-6">
-                I'm a passionate full stack developer with expertise in modern web technologies. 
-                I love building scalable applications and solving complex problems through code.
-              </p>
-              <p className="text-lg mb-8">
-                When I'm not coding, you can find me exploring new technologies, cooking, or learning something new.
-              </p>
-            </div>
-            <div>
-              <h3 className="text-2xl font-bold mb-6">Skills & Technologies</h3>
-              <div className="skills-grid">
-                <div className="skill-card">
-                  <h4 className="skill-title">Frontend</h4>
-                  <p className="skill-description">React, Vue, Next.js/Nuxt.js, TypeScript</p>
+          <div className="showcase">
+            {showcases.map((s) => (
+              <article key={s.number} className="showcase-item">
+                <div className="showcase-visual">
+                  <img src={s.image} alt={s.title} />
                 </div>
-                <div className="skill-card">
-                  <h4 className="skill-title">Backend</h4>
-                  <p className="skill-description">Node.js, Express, Python, PostgreSQL, .NET Entity,  NestJS, Flask</p>
+                <div className="showcase-copy">
+                  <div className="showcase-number">{s.number}</div>
+                  <h3 className="showcase-title">
+                    {s.title} <em>{s.titleEm}</em>
+                  </h3>
+                  <p className="showcase-description">{s.description}</p>
+                  <div className="showcase-tags">
+                    {s.tags.map((t) => (
+                      <span key={t.label} className={`tag ${t.tone}`}>{t.label}</span>
+                    ))}
+                  </div>
+                  <div className="showcase-links">
+                    {s.links.map(renderLink)}
+                  </div>
                 </div>
-                <div className="skill-card">
-                  <h4 className="skill-title">Languages & Databases</h4>
-                  <p className="skill-description">TypeScript/JavaScript, C#, Python,
-                  PHP, SQL Server, MongoDB, Redis, MySQL</p>
-                </div>
-                <div className="skill-card">
-                  <h4 className="skill-title">Architecture & APIs </h4>
-                  <p className="skill-description">REST, OData, GraphQL, Microservices, API Integrations</p>
-                </div>
-                <div className="skill-card">
-                  <h4 className="skill-title">DevOps & Infrastructure</h4>
-                  <p className="skill-description">Azure, Google Cloud, Firebase, Docker, CI/CD (Azure DevOps, GitHub Actions, Jenkins)</p>
-                </div>
-                <div className="skill-card">
-                  <h4 className="skill-title">Testing & Quality</h4>
-                  <p className="skill-description">Unit & Integration Testing (Jest, NUnit, PyTest, Cypress)</p>
-                </div>
-              </div>
-            </div>
+              </article>
+            ))}
           </div>
-        </div>
-      </section>
 
-      {/* Projects Section */}
-      <section id="projects" className="section projects">
-        <div className="container">
-          <h2 className="text-center mb-12">Featured Projects</h2>
-          <div className="flex flex-wrap gap-4 justify-center">
-            {/* Project 1 */}
-            <div className="card">
-              <div className="card-header" style={{ background: 'linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%)' }}>
-                <img src="https://res.cloudinary.com/shuzchef/image/upload/v1757796678/portfolio/ckev6mkjsf0elso75qxm.png" alt="Fighters-Edge" />
-              </div>
-              <div className="card-content">
-                <h3 className="card-title">Fighters-Edge</h3>
-                <p className="card-description">
-                  A full-stack social feed solution built with Nuxt.js, Node.js, and MongoDb.
-                </p>
-                <div className="tags">
-                  <span className="tag tag-blue">Nuxt.js</span>
-                  <span className="tag tag-green">Node.js</span>
-                  <span className="tag tag-purple">MongoDb</span>
-                </div>
-                <div className="project-links">
-                  <Link href="/fighters-edge" className="project-link">View Details</Link>
-                  <a href="https://fighters-edge.com" className="project-link">Live Demo</a>
-                  <a href="https://github.com/shuzaku/fightme" className="project-link-secondary">GitHub</a>
-                </div>
-              </div>
-            </div>
-
-            {/* Project 2 */}
-            <div className="card">
-              <div className="card-header" style={{ background: 'linear-gradient(135deg, #10b981 0%, #3b82f6 100%)' }}>
-              <img src="https://res.cloudinary.com/shuzchef/image/upload/v1757969941/portfolio/x5gst9wfaehn0dkupcf3.png" alt="Fighters-Edge" />
-
-              </div>
-              <div className="card-content">
-                <h3 className="card-title">Replay Reviewer</h3>
-                <p className="card-description">
-                  A object detection and classification tool for analyzing replays.
-                </p>
-                <div className="tags">
-                  <span className="tag tag-blue">Python</span>
-                  <span className="tag tag-orange">Ultralytics</span>
-                  <span className="tag tag-yellow">OpenAi</span>
-                </div>
-                <div className="project-links">
-                  <a href="#" className="project-link">Live Demo</a>
-                  <a href="#" className="project-link-secondary">GitHub</a>
-                </div>
-              </div>
-            </div>
-
-            {/* Project 3 */}
-            <div className="card">
-              <div className="card-header" style={{ background: 'linear-gradient(135deg, #8b5cf6 0%, #ec4899 100%)' }}>
-                <img src="https://res.cloudinary.com/shuzchef/image/upload/v1757984649/portfolio/ykonh6cflvs594om0ye9.png" alt="Marketing Platform" />
-              </div>
-              <div className="card-content">
-                <h3 className="card-title">Marketing Platform</h3>
-                <p className="card-description">
-                  A comprehensive sales and marketing application for IT service providers.
-                </p>
-                <div className="tags">
-                  <span className="tag tag-blue">Vue</span>
-                  <span className="tag tag-green">Node.js</span>
-                  <span className="tag tag-purple">.NET Entity</span>
-                </div>
-                <div className="project-links">
-                  <Link href="/marketing-app" className="project-link">View Details</Link>
-                  <a href="#" className="project-link">Live Demo</a>
-                  <a href="#" className="project-link-secondary">GitHub</a>
-                </div>
-              </div>
-            </div>
-          </div>
-          
-          {/* View More Projects Button */}
-          <div className="text-center" style={{ marginTop: '3rem' }}>
+          <div className="text-center" style={{ marginTop: "5rem" }}>
             <Link href="/projects" className="btn btn-primary">
-              View More Projects
+              Browse All Projects
+              <span className="arrow">→</span>
             </Link>
           </div>
         </div>
       </section>
 
-      {/* Contact Section */}
-      <section id="contact" className="section" style={{ background: 'var(--card-bg)' }}>
-        <div className="container" style={{ maxWidth: '64rem' }}>
-          <h2 className="text-center mb-12">Get In Touch</h2>
-          <div className="grid grid-2">
+      {/* ===== CONTACT ===== */}
+      <section id="contact" className="section contact">
+        <div className="container">
+          <div className="contact-split">
             <div>
-              <h3 className="text-2xl font-bold mb-6">Let's work together!</h3>
-              <p className="text-lg mb-8">
-                I'm always interested in new opportunities and exciting projects. 
-                Whether you have a question or just want to say hi, I'll try my best to get back to you!
+              <div className="eyebrow">Contact</div>
+              <h2 className="section-title">
+                Let's <em>build</em> something together.
+              </h2>
+              <p className="section-lede" style={{ marginBottom: "1rem" }}>
+                Got an idea, a role, or just want to chat? My inbox is open and
+                I try to reply within a day.
               </p>
               <div className="contact-info">
-                <div className="contact-item">
-                  <span className="contact-icon">📧</span>
+                <a href="mailto:mtchau@gmail.com" className="contact-item" style={{ textDecoration: "none" }}>
+                  <span className="contact-icon">✉</span>
                   <span>mtchau@gmail.com</span>
-                </div>
+                </a>
                 <div className="contact-item">
-                  <span className="contact-icon">📱</span>
+                  <span className="contact-icon">☎</span>
                   <span>+1 (512) 986-2807</span>
                 </div>
                 <div className="contact-item">
-                  <span className="contact-icon">📍</span>
+                  <span className="contact-icon">⌖</span>
                   <span>Dallas, TX</span>
                 </div>
               </div>
             </div>
-            <form onSubmit={handleSubmit}>
-              {submitStatus === 'success' && (
+
+            <form onSubmit={handleSubmit} className="contact-card">
+              {submitStatus === "success" && (
                 <div className="alert alert-success">
-                  Message sent successfully! I'll get back to you soon.
+                  Message sent — I'll get back to you soon.
                 </div>
               )}
-              {submitStatus === 'error' && (
+              {submitStatus === "error" && (
                 <div className="alert alert-error">
-                  There was an error sending your message. Please try again.
+                  Something went wrong. Please try again.
                 </div>
               )}
               <div className="form-group">
@@ -277,7 +390,7 @@ export default function Home() {
                   onChange={handleInputChange}
                   required
                   className="form-input"
-                  placeholder="your.email@example.com"
+                  placeholder="you@example.com"
                 />
               </div>
               <div className="form-group">
@@ -290,32 +403,55 @@ export default function Home() {
                   required
                   rows={4}
                   className="form-input form-textarea"
-                  placeholder="Your message"
-                ></textarea>
+                  placeholder="Tell me about your project…"
+                />
               </div>
               <button
                 type="submit"
                 disabled={isSubmitting}
                 className="btn btn-primary w-full"
               >
-                {isSubmitting ? 'Sending...' : 'Send Message'}
+                {isSubmitting ? "Sending…" : "Send Message"}
+                <span className="arrow">→</span>
               </button>
             </form>
           </div>
         </div>
       </section>
 
-      {/* Footer */}
       <footer className="footer">
         <div className="container">
           <div className="footer-content">
             <div>
-              <p style={{ color: '#94a3b8' }}>&copy; 2025 Marvin's Portfolio. All rights reserved.</p>
+              <p style={{ color: "var(--muted)", margin: 0 }}>
+                &copy; {new Date().getFullYear()} Marvin Chau — crafted with care.
+              </p>
             </div>
             <div className="footer-links">
-              <a href="https://www.linkedin.com/in/marvin-chau-8b356b14/" className="footer-link">LinkedIn</a>
-              <a href="https://github.com/shuzaku" className="footer-link">GitHub</a>
-              <a href="https://x.com/ShuzChef" className="footer-link">Twitter</a>
+              <a
+                href="https://www.linkedin.com/in/marvin-chau-8b356b14/"
+                className="footer-link"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                LinkedIn
+              </a>
+              <a
+                href="https://github.com/shuzaku"
+                className="footer-link"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                GitHub
+              </a>
+              <a
+                href="https://x.com/ShuzChef"
+                className="footer-link"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Twitter
+              </a>
             </div>
           </div>
         </div>

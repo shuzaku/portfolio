@@ -45,12 +45,12 @@ export default function Navbar({ currentPage = "" }: NavbarProps) {
     { href: "/", label: "Home", id: "home" },
     { href: "/#about", label: "About", id: "about" },
     { href: "/projects", label: "Projects", id: "projects" },
+    { href: "/websites", label: "Websites", id: "websites" },
     { href: "/#contact", label: "Contact", id: "contact" },
   ];
 
   const isActive = (itemId: string) => {
     if (currentPage === itemId) return true;
-    if (currentPage === "projects" && itemId === "projects") return true;
     return false;
   };
 
@@ -60,12 +60,22 @@ export default function Navbar({ currentPage = "" }: NavbarProps) {
         <div className="nav-content">
           {/* Logo */}
           <div>
-            <a 
-              href="/" 
-              className="text-xl font-bold" 
-              style={{ textDecoration: 'none', color: 'var(--text-primary)' }}
+            <a
+              href="/"
+              style={{
+                textDecoration: 'none',
+                color: 'var(--cream)',
+                fontFamily: 'var(--font-display)',
+                fontSize: '1.35rem',
+                fontWeight: 500,
+                letterSpacing: '-0.02em',
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '0.5rem',
+              }}
             >
-              Marvin's Portfolio
+              <span style={{ color: 'var(--amber)' }}>✦</span>
+              Marvin Chau
             </a>
           </div>
 
@@ -81,13 +91,12 @@ export default function Navbar({ currentPage = "" }: NavbarProps) {
                   {item.label}
                 </a>
               ))}
-              <a 
-                href="https://res.cloudinary.com/shuzchef/image/upload/v1757991057/portfolio/saduwmvvdy0fnv7wscta.pdf" 
-                target="_blank" 
+              <a
+                href="https://res.cloudinary.com/shuzchef/image/upload/v1757991057/portfolio/saduwmvvdy0fnv7wscta.pdf"
+                target="_blank"
                 className="nav-link nav-link-resume"
-                style={{ color: 'var(--primary)', fontWeight: '600' }}
               >
-                📄 Resume
+                Resume ↗
               </a>
             </div>
           </div>
@@ -121,13 +130,13 @@ export default function Navbar({ currentPage = "" }: NavbarProps) {
                 {item.label}
               </a>
             ))}
-            <a 
-              href="https://res.cloudinary.com/shuzchef/image/upload/v1757991057/portfolio/saduwmvvdy0fnv7wscta.pdf" 
-              target="_blank" 
+            <a
+              href="https://res.cloudinary.com/shuzchef/image/upload/v1757991057/portfolio/saduwmvvdy0fnv7wscta.pdf"
+              target="_blank"
               className="mobile-nav-link mobile-nav-link-resume"
               onClick={closeMobileMenu}
             >
-              📄 Resume
+              Resume ↗
             </a>
           </div>
         </div>
